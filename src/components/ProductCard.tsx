@@ -1,10 +1,13 @@
 import type { Product } from '../types/product';
+import { useCart } from '../context/CartContext';
+
 
 type Props = {
     product:Product
 }
 
 export function ProductCard({ product }:Props){
+    const { addToCart } = useCart();
     return(
         <div data-testid="product-card" className='rounded-2xl gb-white shadow-sm hover:shadow-md transition overflow-hidden'>
             <img 
@@ -19,7 +22,12 @@ export function ProductCard({ product }:Props){
                 <p data-testid="product-price" className='text-[var(--color-brand-primary)] font-bold- text-xl'>
                     R$ {product.price.toFixed(2)}
                 </p>
-                {!product.isAvailable && (
+                {product.isAvailable ? (
+                    <button
+                        onClick={() => addToCart(product)}
+                        className='mt-4 bg-brand-primary text-white px-4 py-2 rounded'
+                    >Adicionar ao carrinho</button>
+                ):(
                     <span data-testid="product-unavailable" className='inline-block text-sm text-red-600 font-medium'>
                         Indisponível
                     </span>

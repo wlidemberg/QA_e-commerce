@@ -2,6 +2,8 @@
 import { useCart } from '../context/CartContext';
 import { RiDeleteBin3Fill } from "react-icons/ri";
 import { useAuth } from '../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
+
 
 
 import { RiLoginCircleFill, RiLogoutCircleFill  } from "react-icons/ri";
@@ -14,12 +16,18 @@ type Props = {
 
 export function CartDrawer({ isOpen, onClose }:Props){
     const { items, removeFromCart, total } = useCart();
-    const { user, login, logout } = useAuth();
+    const { user, logout } = useAuth();
+    const navigate = useNavigate();
+
 
     if (!isOpen) return null;
 
     function handleCheckOut(){
-        console.log("Finalizar Compra")
+        if(!user){
+            navigate("/login?redirect=/?openCart=true");
+            return
+        }
+        alert('checkout')
     }
 
     return(
@@ -45,7 +53,14 @@ export function CartDrawer({ isOpen, onClose }:Props){
 
                     <div className='flex gap-2'>
                         {!user ? (
-                            <button className='flex items-center justify-center gap-2 font-semibold hover:text-[var(--color-brand-primary)] mr-4 transition-all' onClick={login}>
+                            <button 
+                                className='flex items-center justify-center gap-2 font-semibold hover:text-[var(--color-brand-primary)] mr-4 transition-all' 
+                                onClick={() => {
+                                    if(!user){
+                                        navigate("/login?redirect=/?openCart=true");
+                                    }
+                                }}
+                            >
                                 <RiLoginCircleFill size="2em" color="green"/>
                                 Login
                             </button>

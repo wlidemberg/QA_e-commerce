@@ -1,5 +1,10 @@
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useCart } from '../context/CartContext'
+import { AddToCartModal } from './AddToCartModal';
 import type { Product } from '../types/product';
-import { useCart } from '../context/CartContext';
+import { AddToCartButton } from './AddToCartButton';
+//import { useCart } from '../context/CartContext';
 
 
 type Props = {
@@ -8,6 +13,21 @@ type Props = {
 
 export function ProductCard({ product }:Props){
     const { addToCart } = useCart();
+    const [ showModal, setShowModal ] = useState(false);
+    const navigate = useNavigate()    
+
+    function handleAddToCart(){
+        if(!product.isAvailable) return
+        addToCart(product)
+        setShowModal(true)
+        
+    }
+
+    function handleGoToCart(){
+        setShowModal(false);
+        navigate("/?openCart=true")
+    }
+    
     return(
         <div data-testid="product-card" className='rounded-2xl gb-white shadow-sm hover:shadow-md transition overflow-hidden'>
             <img 
@@ -23,16 +43,24 @@ export function ProductCard({ product }:Props){
                     R$ {product.price.toFixed(2)}
                 </p>
                 {product.isAvailable ? (
-                    <button
-                        onClick={() => addToCart(product)}
-                        className='mt-4 bg-brand-primary text-white px-4 py-2 rounded'
-                    >Adicionar ao carrinho</button>
+                    <div>
+                        <AddToCartButton onClick={handleAddToCart} disabled={!product.isAvailable}/>
+                    </div>
+                    // <button
+                    //     onClick={handleAddToCart}
+                    //    className='mt-4 bg-brand-primary text-white px-4 py-2 rounded'
+                    // >Adicionar ao carrinho</button>
                 ):(
                     <span data-testid="product-unavailable" className='inline-block text-sm text-red-600 font-medium'>
                         Indisponível
                     </span>
                 )}
             </div>
+            <AddToCartModal
+                open={showModal}
+                onClose={() => setShowModal(false)}
+                onGoToCart={handleGoToCart}
+            />
         </div>
     );
 }

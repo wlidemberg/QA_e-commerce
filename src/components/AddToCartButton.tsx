@@ -1,21 +1,16 @@
-import type { Product } from "../types/product";
-import { useCart } from "../context/CartContext";
 
 type Props = {
-    product:Product
+    onClick:() => void
+    disabled?: boolean
 }
 
-export function AddToCartButton({product}:Props){
-    const { addToCart } = useCart();
-    if(!product.isAvailable){
-        return(
-            <span className="text-red-500 font-semibold">Indisponível</span>
-        );
-    }
+export function AddToCartButton({onClick, disabled}:Props){
     return(
         <button
+            type="button"
+            disabled={disabled}
+            onClick={onClick}
             data-testid="add-to-cart"
-            onClick={() => addToCart(product)}
             className="bg-brand-primary text-white px-4 py-2 rounded"
         >Adicionar ao Carrinho</button>
     );

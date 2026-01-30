@@ -1,14 +1,28 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { CartButtonCount } from './CartButtonCount';
 import { CartDrawer } from './CartDrawer';
 import { useAuth } from '../context/AuthContext';
+import { useNavigate } from 'react-router-dom'
 
 import { RiLoginCircleFill, RiLogoutCircleFill  } from "react-icons/ri";
 
 
 export function Header(){
     const [isOpenCart, setIsOpenCart] = useState(false);
-    const { user, login, logout } = useAuth();
+    const location = useLocation();
+    const { user, logout } = useAuth();
+    const navigate = useNavigate()
+    
+
+    useEffect(() => {
+        const params = new URLSearchParams(location.search);
+        const openCart = params.get("openCart");
+        if(openCart === "true"){
+            setIsOpenCart(true)
+        }
+    },[location.search])
+    
 
     return(
         <>
@@ -38,9 +52,15 @@ export function Header(){
                     {/* Login/Logout */}
                     <div className='flex gap-2'>
                         {!user ? (
-                            <button className='flex items-center justify-center gap-2 font-semibold hover:text-[var(--color-brand-primary)] mr-4 transition-all' onClick={login}>
-                                <RiLoginCircleFill size="2em" color="green"/>
-                                Login
+                            <button 
+                            
+                                className='flex items-center justify-center gap-2 font-semibold hover:text-[var(--color-brand-primary)] mr-4 transition-all'
+                                onClick={() => {
+                                    navigate(`/login?redirect=${location.pathname}`)
+                                }}
+                                >
+                                    <RiLoginCircleFill size="2em" color="green"/>
+                                    Login
                             </button>
                         ):(
                             <div className='flex items-center justify-center '>
@@ -49,7 +69,10 @@ export function Header(){
                                 >
                                     <RiLogoutCircleFill size="2em" color='var(--color-brand-primary)'/>
                                 </button>
-                                <p className='text-sm font-semibold text-[var(--color-brand-secondary)] mr-4'>Olá, {user.name}</p>
+                                <p 
+                                    className='text-sm font-semibold text-[var(--color-brand-secondary)] mr-4'
+                                    data-testid="user-name"    
+                                >Olá, {user.name}</p>
                             </div>
                         )}
                         <button onClick={() => setIsOpenCart(true)}>
@@ -59,7 +82,14 @@ export function Header(){
                     
                 </div>
             </header>
-            <CartDrawer isOpen={isOpenCart} onClose={() => setIsOpenCart(false)} />
+            <CartDrawer 
+                isOpen={isOpenCart} 
+                onClose={() => {
+                    setIsOpenCart(false);
+                    navigate("/", {replace:true})
+                }
+            }
+            />
         </>
     )
 }

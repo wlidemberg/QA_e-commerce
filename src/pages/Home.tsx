@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { products } from '../data/products';
 import { ProductCard } from '../components/ProductCard';
 import { Filters } from '../components/Filters';
+import { Header } from '../components/Header';
+import { Footer } from '../components/Footer'; 
 import type{ Filters as FiltersType } from '../types/filters';
 
 export function Home() {
@@ -31,28 +33,32 @@ export function Home() {
         return true;
     });
     return(
-        <main className='bg-[var(--color-background-main)] min-h-screen p-10'>
-           
-            <h1 className='text-3xl font-bold mb-8'>Tênis em Destaque</h1>
-        
-            {/* Filtros */}
-            <Filters 
-                filters={filters}
-                onChange={setFilters}
-                brands={brands}
-            />
+        <div>
+            <Header />
+            <main className='bg-[var(--color-background-main)] min-h-screen p-10'>
+                
+                <h1 className='text-3xl font-bold mb-8'>Tênis em Destaque</h1>
             
-            
-            {/* Produtos */}
-            <section className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8'>
-                {filteredProducts.map(product => (
-                    <ProductCard key={product.id} product={product} />
-                ))}
+                {/* Filtros */}
+                <Filters 
+                    filters={filters}
+                    onChange={setFilters}
+                    brands={brands}
+                />
+                
+                
+                {/* Produtos */}
+                <section className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8'>
+                    {filteredProducts.map(product => (
+                        <ProductCard key={product.id} product={product} />
+                    ))}
 
-                {filteredProducts.length === 0 && (
-                    <p className='text-gray-500'>Nenhum produto encontrado</p>
-                )}
-            </section>
-        </main>
+                    {filteredProducts.length === 0 && (
+                        <p className='text-gray-500'>Nenhum produto encontrado</p>
+                    )}
+                </section>
+            </main>
+            <Footer />
+        </div>
     );
 }

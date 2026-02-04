@@ -6,6 +6,7 @@ type Props = {
 
 export function AddToCartModal({ open, onClose, onGoToCart }:Props){
     if(!open) return null;
+    
 
     return(
         <div

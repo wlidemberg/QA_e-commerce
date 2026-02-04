@@ -13,6 +13,8 @@ export function Home() {
         maxPrice:1000
     })
 
+    
+
     const brands = Array.from(
         new Set(products.map(product => product.brand))
     )

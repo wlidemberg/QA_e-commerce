@@ -4,6 +4,7 @@ import { useCart } from '../context/CartContext'
 import { AddToCartModal } from './AddToCartModal';
 import type { Product } from '../types/product';
 import { AddToCartButton } from './AddToCartButton';
+import { ProductDetailsModal } from './ProductDetailsModal';
 //import { useCart } from '../context/CartContext';
 
 
@@ -15,6 +16,12 @@ export function ProductCard({ product }:Props){
     const { addToCart } = useCart();
     const [ showModal, setShowModal ] = useState(false);
     const navigate = useNavigate()    
+
+
+    const [selectProduct, setSelecetProduct] = useState<Product | null>(null);
+    const [openDetails, setOpenDetails] = useState(false);
+
+    
 
     function handleAddToCart(){
         if(!product.isAvailable) return
@@ -44,7 +51,12 @@ export function ProductCard({ product }:Props){
                 </p>
                 {product.isAvailable ? (
                     <div>
-                        <AddToCartButton onClick={handleAddToCart} disabled={!product.isAvailable}/>
+                        <div>
+                            <AddToCartButton onClick={handleAddToCart} disabled={!product.isAvailable}/>
+                        </div>
+                        <div>
+                            <button onClick={() => { setSelecetProduct(product); setOpenDetails(true) }}>Ver Detalhes</button>
+                        </div>
                     </div>
                     // <button
                     //     onClick={handleAddToCart}
@@ -56,6 +68,16 @@ export function ProductCard({ product }:Props){
                     </span>
                 )}
             </div>
+            <ProductDetailsModal
+                open={openDetails}
+                product={selectProduct}
+                onClose={() => setOpenDetails(false)}
+                onAddSuccess={() => {
+                    setOpenDetails(false);
+                    setShowModal(true);    
+                }}
+            />    
+
             <AddToCartModal
                 open={showModal}
                 onClose={() => setShowModal(false)}

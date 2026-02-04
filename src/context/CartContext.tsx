@@ -6,6 +6,7 @@ type CartContextType = {
     items:CartItem[]
     addToCart:(product:Product) => void
     removeFromCart: (productId:string) => void
+    clearCart: () => void
     total:number
 }
 
@@ -13,6 +14,10 @@ const CartContext = createContext<CartContextType | null>(null);
 
 export function CartProvider({children}:{children:React.ReactNode}){
     const [items, setItems] = useState<CartItem[]>([]);
+
+    function clearCart(){
+        setItems([])
+    }
 
     function addToCart(product:Product){
         if(!product.isAvailable) return;
@@ -37,7 +42,7 @@ export function CartProvider({children}:{children:React.ReactNode}){
     );
 
     return(
-        <CartContext.Provider value={{ items, addToCart, removeFromCart, total }}>
+        <CartContext.Provider value={{ items, addToCart, removeFromCart, clearCart, total }}>
             {children}
         </CartContext.Provider>    
     )

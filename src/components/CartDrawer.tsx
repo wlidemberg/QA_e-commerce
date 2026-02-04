@@ -27,7 +27,7 @@ export function CartDrawer({ isOpen, onClose }:Props){
             navigate("/login?redirect=/?openCart=true");
             return
         }
-        alert('checkout')
+        navigate("/checkout")
     }
 
     return(

@@ -22,7 +22,7 @@ Demonstrar, na prática, a capacidade de:
 A aplicação base do e-commerce está disponível publicamente para execução de testes exploratórios manuais pelo navegador:
 
 QA Store – aplicação publicada:
-https://SEU-LINK-DO-VERCEL-AQUI
+https://qa-e-commerce.vercel.app/
 
 Observação importante
 Os testes automatizados com Cypress são executados localmente ou em pipeline de CI.

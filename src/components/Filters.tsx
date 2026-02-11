@@ -8,8 +8,8 @@ type Props ={
 
 export function Filters({ filters, onChange, brands }:Props){
     return(
-        <aside className='bg-white flex justify-between p-6 rounded2xl shadow-sm space-y-6 border'>
-            <div>
+        <aside className='grid grid-cols-1 md:grid-cols-3 mb-4 gap-8 p-6 rounded-2xl shadow-sm'>
+            <div >
                 <label className='block text-sm font-medium mb-2'>Marca</label>
                 <select
                     data-testid="filter-brand"
@@ -25,7 +25,7 @@ export function Filters({ filters, onChange, brands }:Props){
                     ))}
                 </select>                
             </div>
-
+                    
             {/* Preço */}
             <div>
                 <label className="block text-sm font-medium mb-2">Preço Máximo</label>
@@ -44,7 +44,7 @@ export function Filters({ filters, onChange, brands }:Props){
             </div>
 
             {/* Disponibilidade */}
-            <div className='flex items-center gap-2'>
+            <div className='flex justify-center items-center gap-2'>
                 <input 
                     data-testid="filter-available"
                     type="checkbox" 

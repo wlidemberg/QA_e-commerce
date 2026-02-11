@@ -36,14 +36,14 @@ export function ProductCard({ product }:Props){
     }
     
     return(
-        <div data-testid="product-card" className='rounded-2xl gb-white shadow-sm hover:shadow-md transition overflow-hidden'>
+        <div data-testid="product-card" className='rounded-2xl bg-white border border-gray-500/30 shadow-md hover:shadow-md transition overflow-hidden mb-4'>
             <img 
                 src={product.image}
                 alt={product.name}
                 className='h-56 w-full object-cover'    
             />
 
-            <div className='p-4 space-y-2'>
+            <div className='flex flex-col gap-4s p-4 space-y-2'>
                 <span className='text-sm text-gray-500'>{product.brand}</span>
                 <h2 data-testid="product-name" className='text-lg font-semibold'>{product.name}</h2>
                 <p data-testid="product-price" className='text-[var(--color-brand-primary)] font-bold- text-xl'>
@@ -51,10 +51,10 @@ export function ProductCard({ product }:Props){
                 </p>
                 {product.isAvailable ? (
                     <div>
-                        <div>
+                        <div className='text-center my-8 mb-4'>
                             <AddToCartButton onClick={handleAddToCart} disabled={!product.isAvailable}/>
                         </div>
-                        <div>
+                        <div className='text-center mb-4'>
                             <button
                                 data-testid="open-product-details"
                                 onClick={() => { setSelecetProduct(product); setOpenDetails(true) }}

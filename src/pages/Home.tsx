@@ -37,9 +37,9 @@ export function Home() {
     return(
         <div>
             <Header />
-            <main className='bg-[var(--color-background-main)] min-h-screen p-10'>
+            <main className='min-h-screen p-10'>
                 
-                <h1 className='text-3xl font-bold mb-8'>Tênis em Destaque</h1>
+                <h1 className='text-3xl text-center font-bold mb-8'>Tênis em Destaque</h1>
             
                 {/* Filtros */}
                 <Filters 

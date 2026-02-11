@@ -27,7 +27,7 @@ export function Header(){
     return(
         <>
             <header data-testid="header" className="bg-white border-b border-gray-200">
-                <div className="max-w-7xl mx-auto px-8 py-5 flex items-center justify-between">
+                <div className="max-w-7xl mx-auto px-8 py-5  flex flex-col md:flex-row items-center justify-between gap-8">
                     {/* Logo */}
                     <div data-testid="logo" className="text-2xl font-bold tracking-tight text-[var(--color-brand-primary)]">
                         QA <span className="text-black">Store</span>

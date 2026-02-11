@@ -91,11 +91,13 @@ export function Checkout(){
             </section>
 
             {/* Pagamento */}
-            <section className="bg-white rounded-xl p-6 shadow-sm space-y-4">
+            <section
+                data-testid="payment-method"    
+                className="bg-white rounded-xl p-6 shadow-sm space-y-4">
                 <h2 className="font-semibold">Forma de Pagamento</h2>
                 <label className="flex items-center gap-2">
                     <input 
-                        data-test-id='payment-pix'
+                        data-testid='payment-pix'
                         type="radio"
                         name="payment"
                         checked={payment === "pix"}

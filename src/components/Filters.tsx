@@ -8,7 +8,7 @@ type Props ={
 
 export function Filters({ filters, onChange, brands }:Props){
     return(
-        <aside className='bg-white p-6 rounded2xl shadow-sm space-y-6'>
+        <aside className='bg-white flex justify-between p-6 rounded2xl shadow-sm space-y-6 border'>
             <div>
                 <label className='block text-sm font-medium mb-2'>Marca</label>
                 <select
@@ -26,18 +26,6 @@ export function Filters({ filters, onChange, brands }:Props){
                 </select>                
             </div>
 
-            {/* Disponibilidade */}
-            <div className='flex items-center gap-2'>
-                <input 
-                    data-testid="filter-available"
-                    type="checkbox" 
-                    checked={filters.onlyAvialable}
-                    onChange={(e) => onChange({...filters, onlyAvialable:e.target.checked})} 
-                    
-                />        
-                <span className='text-sm'>Somente Disponíveis</span>
-            </div>
-
             {/* Preço */}
             <div>
                 <label className="block text-sm font-medium mb-2">Preço Máximo</label>
@@ -53,6 +41,18 @@ export function Filters({ filters, onChange, brands }:Props){
                 <span className="text-sm text-gray-600 p-2">
                     Até R$ {filters.maxPrice}
                 </span>
+            </div>
+
+            {/* Disponibilidade */}
+            <div className='flex items-center gap-2'>
+                <input 
+                    data-testid="filter-available"
+                    type="checkbox" 
+                    checked={filters.onlyAvialable}
+                    onChange={(e) => onChange({...filters, onlyAvialable:e.target.checked})} 
+                    
+                />        
+                <span className='text-sm'>Somente Disponíveis</span>
             </div>
         </aside>
     );

@@ -54,6 +54,7 @@ export function CartDrawer({ isOpen, onClose }:Props){
                     <div className='flex gap-2'>
                         {!user ? (
                             <button 
+                                data-testid="link-login"
                                 className='flex items-center justify-center gap-2 font-semibold hover:text-[var(--color-brand-primary)] mr-4 transition-all' 
                                 onClick={() => {
                                     if(!user){
@@ -67,6 +68,7 @@ export function CartDrawer({ isOpen, onClose }:Props){
                         ):(
                             <div className='flex items-center justify-center '>
                                 <button
+                                data-testid="link-logout"
                                 onClick={logout}
                                 >
                                     <RiLogoutCircleFill size="2em" color='var(--color-brand-primary)'/>
@@ -78,7 +80,12 @@ export function CartDrawer({ isOpen, onClose }:Props){
 
                 </div>
 
-                <h2 className='text-2xl font-bold mb-4'>Seu Carrinho</h2>
+                <h2 
+                    data-testid="text-your-cart"
+                    className='text-2xl font-bold mb-4'
+                >
+                    Seu Carrinho
+                </h2>
                 
                 <ul>
                     {items.map(item => (
@@ -106,14 +113,21 @@ export function CartDrawer({ isOpen, onClose }:Props){
                 </ul>
 
                 {items.length === 0 ? (
-                    <p className='bg-gray-100 text-2xl text-gray-500 border rounded-4xl py-4'>Carrinho está vazio</p>
+                    <p 
+                        data-testid="cart-is-empty"    
+                        className='bg-gray-100 text-2xl text-gray-500 border rounded-4xl py-4'
+                    >
+                        Carrinho está vazio
+                    </p>
                 ):(
                     <div className="flex justify-between items-center py-2 gap-2">
-                        <button 
+                        <button
+                            data-testid="cart-btn-finalize-purchase"
                             className='w-full bg-[var(--color-brand-secondary)] rounded-lg py-2 px-4 text-white'
                             onClick={handleCheckOut}
                         >Finalizar Compra</button>
                         <button 
+                            data-testid="cart-btn-continue-shopping"
                             className='w-full bg-[var(--color-brand-secondary)] rounded-lg py-2 px-4 text-white'
                             onClick={onClose}    
                         >Continuar Comprando</button>

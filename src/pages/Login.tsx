@@ -32,7 +32,7 @@ function Login(){
                 <div className='space-y-2 text-left'>
                     <label className='text-sm font-medium '>Email</label>
                     <input
-                        data-testid="logim-email" 
+                        data-testid="login-email" 
                         type="text"
                         className='w-full border rounded-lg px-3 py-2'
                         value={email}

@@ -55,7 +55,10 @@ export function ProductCard({ product }:Props){
                             <AddToCartButton onClick={handleAddToCart} disabled={!product.isAvailable}/>
                         </div>
                         <div>
-                            <button onClick={() => { setSelecetProduct(product); setOpenDetails(true) }}>Ver Detalhes</button>
+                            <button
+                                data-testid="open-product-details"
+                                onClick={() => { setSelecetProduct(product); setOpenDetails(true) }}
+                            >Ver Detalhes</button>
                         </div>
                     </div>
                     // <button

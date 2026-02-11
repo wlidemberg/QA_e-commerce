@@ -53,7 +53,7 @@ export function Header(){
                     <div className='flex gap-2'>
                         {!user ? (
                             <button 
-                            
+                                data-testid="link-login"
                                 className='flex items-center justify-center gap-2 font-semibold hover:text-[var(--color-brand-primary)] mr-4 transition-all'
                                 onClick={() => {
                                     navigate(`/login?redirect=${location.pathname}`)
@@ -65,6 +65,7 @@ export function Header(){
                         ):(
                             <div className='flex items-center justify-center '>
                                 <button
+                                data-testid="link-logout"
                                 onClick={logout}
                                 >
                                     <RiLogoutCircleFill size="2em" color='var(--color-brand-primary)'/>
@@ -75,7 +76,10 @@ export function Header(){
                                 >Olá, {user.name}</p>
                             </div>
                         )}
-                        <button onClick={() => setIsOpenCart(true)}>
+                        <button 
+                            data-testid="header-btn-open-cart"
+                            onClick={() => setIsOpenCart(true)}
+                        >
                             <CartButtonCount />
                         </button>
                     </div>

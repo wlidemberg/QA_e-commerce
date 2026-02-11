@@ -7,8 +7,8 @@ export function CartButtonCount(){
     const count = items.reduce((acc, i) => acc + i.quantity, 0);
 
     return(
-        <button data-testid="cart-cound" className="relative">
-            <span className="flex gap-2 text-lg text-[var(--color-brand-primary)]"><RiShoppingCart2Fill size="2em" /> {count}</span>
+        <button data-testid="cart-count" className="relative">
+            <span className="flex gap-2 text-lg text-[var(--color-brand-primary)]"><RiShoppingCart2Fill data-testid="icon-cart" size="2em" /> {count}</span>
         </button>
     );
 }

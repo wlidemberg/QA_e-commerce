@@ -1,14 +1,16 @@
 {
   "compilerOptions": {
     "target": "ESNext",
+    "useDefineForClassFields": true,
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
-    "allowJs": true,
+    "module": "ESNext",
     "skipLibCheck": true,
-    "baseUrl": ".",
-    "types": ["cypress", "node"]
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "strict": true
   },
-  "include": [
-    "src", 
-    "cypress/**/*.ts" // Isso faz o VS Code ler seus commands
-  ]
+  "include": ["src"]
 }
